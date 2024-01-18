@@ -6,4 +6,4 @@ RUN native-image org.kpipe.StepWrapper --static --libc=musl -march=compatibility
 # experimental: -H:TempDirectory=/tmp
 
 FROM alpine:3.18.4
-COPY --from=build /app/org.kpipe.StepWrapper /bin/step-wrapper
+COPY --from=build /app/org.kpipe.stepwrapper /bin/step-wrapper
