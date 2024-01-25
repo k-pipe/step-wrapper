@@ -124,7 +124,7 @@ public class StepWrapper {
     }
 
     private static void initialLogs(final boolean createDir, final PrintStream log) {
-        String info = "WRAPPER> Wrapped by "+StepWrapper.class.getPackage().getName();
+        String info = "Wrapped by "+StepWrapper.class.getPackage().getName();
         log(log, info);
         log(log, META_STARTED + ZonedDateTime.now());
         if (createDir) {
