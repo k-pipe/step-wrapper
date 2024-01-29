@@ -31,7 +31,7 @@ public class CommandExecutor {
             readVariables(path, variables);
             return executeRecursively(commands.subList(1, commands.size()), variables);
         }
-        if (first.equals(CALL)) {
+        if (first.startsWith(CALL)) {
             String path = first.substring(CALL.length());
             return executeRecursively(split(mergeLinesRemovingComments(path)), variables);
         }
