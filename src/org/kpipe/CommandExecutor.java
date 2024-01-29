@@ -80,7 +80,7 @@ public class CommandExecutor {
         while (!done) {
             String before = resolved;
             for (Map.Entry<String, String> e : variables.entrySet()) {
-                resolved = resolved.replaceAll("\\{\\{"+e.getKey()+"\\}\\}", e.getValue());
+                resolved = resolved.replaceAll("\\{\\{"+e.getKey()+"}}", e.getValue());
             }
             done = resolved.equals(before);
         }
