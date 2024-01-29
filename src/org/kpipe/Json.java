@@ -1,7 +1,6 @@
 package org.kpipe;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Json {
 
@@ -64,7 +63,7 @@ public class Json {
     }
 
     private static String parseString(String s) {
-        if (!(s.endsWith("\"") && s.endsWith("\""))) {
+        if (!(s.startsWith("\"") && s.endsWith("\""))) {
             throw new JsonException("expected closing quote at the end of: "+s);
         }
         return s.substring(1, s.length()-1);
@@ -83,15 +82,15 @@ public class Json {
                 res.add(string.substring(prevPos+1, pos).trim());
                 prevPos = pos;
             }
+            if ((ch == '"') && (curlBracketLevel == 0) && (rectBracketLevel == 0)) {
+                if ((numSlashes % 2) == 0) {
+                    insideQuote = !insideQuote;
+                }
+            }
             if (ch == '\\') {
                 numSlashes++;
             } else {
                 numSlashes = 0;
-            }
-            if ((ch == '"') && (curlBracketLevel == 0) && (rectBracketLevel == 0)) {
-                if (numSlashes % 2 == 0) {
-                    insideQuote = !insideQuote;
-                }
             }
             if ((ch == '{') && !insideQuote) {
                 curlBracketLevel++;

@@ -1,0 +1,5 @@
+package org.kpipe;
+
+public enum WrapperState {
+    RUNNING, SUCCESS, ERROR, LOG_TIMEOUT, PROCESS_TIMEOUT, OVERALL_TIMEOUT, POD_SHUTTING_DOWN
+}
