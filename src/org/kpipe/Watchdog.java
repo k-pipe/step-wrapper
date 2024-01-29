@@ -61,8 +61,10 @@ public class Watchdog {
             } else {
                 Log.log("No process is running");
             }
-            Log.log("Terminating watchdog thread");
-            thread.interrupt();
+            if (thread != null) {
+                Log.log("Terminating watchdog thread");
+                thread.interrupt();
+            }
         }
     }
 
