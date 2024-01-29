@@ -115,7 +115,7 @@ public class Log {
     }
 
     private static void log(final PrintStream log, final String prefix, final String line) {
-        println(log, (timeSupplier == null ? "" :  timeSupplier.get()+" ")+prefix+" "+line);
+        println(log == null ? SYS_ERR : log, (timeSupplier == null ? "" :  timeSupplier.get()+" ")+prefix+" "+line);
     }
     private static void println(final PrintStream out, final String line) {
         synchronized(out) {
