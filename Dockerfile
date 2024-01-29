@@ -3,5 +3,5 @@ ADD src ./
 RUN javac org/kpipe/*.java
 RUN native-image org.kpipe.Main --static --libc=musl -march=compatibility
 FROM alpine:latest
-COPY --from=build /app/org.kpipe.Main /bin/step-wrapper
+COPY --from=build /app/org.kpipe.main /bin/step-wrapper
 ENTRYPOINT ["step-wrapper"]
