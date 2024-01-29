@@ -14,10 +14,8 @@ public class StepWrapper {
         state(result);
         done();
         Log.log("CommandExecuter returned state: "+result);
-        if (result.equals(WrapperState.SUCCESS)) {
-            int exitcode = result.ordinal();
-            Log.error("Using error code: "+exitcode);
-            return exitcode;
+        if (!result.equals(WrapperState.SUCCESS)) {
+            return result.ordinal();
         } else {
             return 0;
         }
