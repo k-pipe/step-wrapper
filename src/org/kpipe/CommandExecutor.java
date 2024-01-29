@@ -10,9 +10,8 @@ import java.util.stream.Collectors;
 
 public class CommandExecutor {
 
-    public static final String WITH = "WITH(";
-    public static final String CLOSE_BRACKET = ")";
-    public static final String CALL = "CALL";
+    public static final String WITH = "WITH:";
+    public static final String CALL = "CALL:";
     private static final char COMMENT_CHAR = '#';
 
     public CommandExecutor() {
@@ -28,14 +27,13 @@ public class CommandExecutor {
         }
         String first = commands.get(0);
         if (first.startsWith(WITH)) {
-            Expect.isTrue(first.endsWith(CLOSE_BRACKET), "Expected closing bracket in WITH statement, got "+first);
-            String path = Constants.WORKDIR_INPUT+"/"+first.substring(WITH.length(), first.length()-CLOSE_BRACKET.length()).trim();
+            String path = Constants.WORKDIR_INPUT+"/"+first.substring(WITH.length());
             readVariables(path, variables);
             return executeRecursively(commands.subList(1, commands.size()), variables);
         }
         if (first.equals(CALL)) {
-            Expect.isTrue(commands.size() == 2, "Expected exactly one argument after CALL statement, got "+(commands.size()-1));
-            return executeRecursively(split(mergeLinesRemovingComments(commands.get(1))), variables);
+            String path = first.substring(CALL.length());
+            return executeRecursively(split(mergeLinesRemovingComments(path)), variables);
         }
         return new ProcessExecutor(resolve(variables, commands)).execute();
     }
